@@ -1,10 +1,4 @@
-import 'package:ecommerce/view/checkout_screen.dart';
 import 'package:ecommerce/view/dashboard.dart';
-import 'package:ecommerce/view/home_screen.dart';
-import 'package:ecommerce/view/payment_screen.dart';
-import 'package:ecommerce/view/product_details_screen.dart';
-import 'package:ecommerce/view/search_product_screen.dart';
-import 'package:ecommerce/view/test_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
