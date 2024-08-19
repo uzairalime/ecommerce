@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ecommerce/utilities/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +23,7 @@ class SlButton extends StatelessWidget {
     return Container(
       width: widthbtn ?? width * 0.5,
       height: height * 0.06,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: bgBtnColor ?? AppColor().primary,
         borderRadius: BorderRadius.circular(6),

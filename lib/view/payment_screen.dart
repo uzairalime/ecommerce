@@ -4,7 +4,6 @@ import 'package:ecommerce/utilities/colors.dart';
 import 'package:ecommerce/utilities/notification_icon.dart';
 import 'package:ecommerce/utilities/text/greytextstyle.dart';
 import 'package:ecommerce/utilities/text_field_custom.dart';
-import 'package:ecommerce/utilities/widgets/delivery_card.dart';
 import 'package:ecommerce/utilities/widgets/sl_button.dart';
 import 'package:flutter/material.dart';
 

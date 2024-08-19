@@ -1,11 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ffi';
 
 import 'package:ecommerce/utilities/text/greytextstyle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce/utilities/colors.dart';
-import 'package:flutter/widgets.dart';
 
 class FollowBtn extends StatelessWidget {
   String name;
@@ -23,7 +21,7 @@ class FollowBtn extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
         decoration: BoxDecoration(
           // color: Colors.grey[200],
           color: bgcolor,

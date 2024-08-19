@@ -17,10 +17,10 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   bool selected = true;
   final pages = [
-    HomeScreen(),
-    WishlistScreen(),
-    HistoryScreen(),
-    AccountScreen()
+    const HomeScreen(),
+    const WishlistScreen(),
+    const HistoryScreen(),
+    const AccountScreen()
   ];
 
   int selectedIndex = 0;
@@ -41,24 +41,24 @@ class _DashBoardState extends State<DashBoard> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: selectedIndex == 0
-                  ? Icon(Icons.home_filled)
-                  : Icon(Icons.abc),
+                  ? const Icon(Icons.home_filled)
+                  : const Icon(Icons.abc),
               label: "Home",
             ),
             BottomNavigationBarItem(
                 icon: selectedIndex == 1
-                    ? Icon(Coolicons.search)
-                    : Icon(Coolicons.search),
+                    ? const Icon(Coolicons.search)
+                    : const Icon(Coolicons.search),
                 label: "Whislist"),
             BottomNavigationBarItem(
                 icon: selectedIndex == 2
-                    ? Icon(Icons.edit_document)
-                    : Icon(Icons.edit_document),
+                    ? const Icon(Icons.edit_document)
+                    : const Icon(Icons.edit_document),
                 label: "History"),
             BottomNavigationBarItem(
                 icon: selectedIndex == 3
-                    ? Icon(Coolicons.user)
-                    : Icon(Coolicons.user_check),
+                    ? const Icon(Coolicons.user)
+                    : const Icon(Coolicons.user_check),
                 label: "Account"),
           ],
           currentIndex: selectedIndex,
