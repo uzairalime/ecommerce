@@ -6,6 +6,7 @@ class TestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
+    // ignore: unused_local_variable
     final height = MediaQuery.sizeOf(context).height;
     return Container(
       decoration: BoxDecoration(

@@ -39,6 +39,7 @@ dependencies:
   coolicons: 
   google_fonts: 
   flutter_svg: 
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
