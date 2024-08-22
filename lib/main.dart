@@ -20,13 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       // home: const DashBoard(),
       home: const LoginScreen(),
-      // home: const HomeScreen(),
-      // home: const ProductDetailsScreen(),
-      // home: const TestScreen(),
-      // home: PaymentScreen(),
-      // home: const MyWidget(),
-      // home: SearchProductScreen(),
-      // home: ProductDetailsScreen(),
+      
     );
   }
 }
