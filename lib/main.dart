@@ -1,5 +1,8 @@
+import 'package:ecommerce/ap/testap.dart';
 import 'package:ecommerce/view/dashboard.dart';
+import 'package:ecommerce/view/product_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -19,6 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       // home: const HomeScreen(),
       home: const DashBoard(),
+      // home: const ProductDetailsScreen(),
       // home: const TestScreen(),
       // home: PaymentScreen(),
       // home: const MyWidget(),
