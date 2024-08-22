@@ -3,19 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce/utilities/colors.dart';
 import 'package:ecommerce/utilities/text/greytextstyle.dart';
 
-class TextFieldCustom extends StatelessWidget {
+class InputTextField extends StatelessWidget {
   final String? label;
   final String? hint;
+  // final dynamic keyboard;
+  final TextInputType? keyboardtype;
   final IconData? icon;
-  // final IconData? preIcon;
+  final IconData? preIcon;
   final widthField;
   void Function()? onTap;
   // final IconData? iconsecond;
   final TextEditingController? controller;
-  TextFieldCustom({
+  InputTextField({
     Key? key,
     this.icon,
-    // this.preIcon,
+    this.preIcon,
+    this.keyboardtype,
     this.label,
     this.hint,
     this.controller,
@@ -46,21 +49,30 @@ class TextFieldCustom extends StatelessWidget {
           // text field
           TextFormField(
             controller: controller,
+            keyboardType: keyboardtype,
             decoration: InputDecoration(
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               hintText: hint,
               hintStyle: greyTextStyle(16),
               // prefix: Icon(preIcon),
-              // prefixIcon: Icon(preIcon),
-              suffixIcon: InkWell(
+              prefixIcon: InkWell(
                 onTap: onTap,
                 child: Icon(
-                  icon,
+                  preIcon,
+
                   // size: 20,
                 ),
               ),
+              // suffixIcon: InkWell(
+              //   onTap: onTap,
+              //   child: Icon(
+              //     icon,
+              //     // size: 20,
+              //   ),
+              // ),
               suffixIconColor: AppColor().secondaryGrey,
+              prefixIconColor: AppColor().secondaryGrey,
               // main border
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),

@@ -1,6 +1,4 @@
-import 'package:ecommerce/ap/testap.dart';
-import 'package:ecommerce/view/dashboard.dart';
-import 'package:ecommerce/view/product_details_screen.dart';
+import 'package:ecommerce/view/authorization/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,8 +18,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      // home: const DashBoard(),
+      home: const LoginScreen(),
       // home: const HomeScreen(),
-      home: const DashBoard(),
       // home: const ProductDetailsScreen(),
       // home: const TestScreen(),
       // home: PaymentScreen(),

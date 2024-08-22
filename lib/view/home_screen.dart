@@ -29,11 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
-    // _productGetController.getProductsByCategory("electronics");
     super.initState();
-    // dispose();
   }
 
   bool isActive = false;
@@ -113,8 +109,6 @@ class _HomeScreenState extends State<HomeScreen> {
               SearchTextField(
                 hint: "Search here ...",
                 w: width,
-                // width: width,
-                // label: "Search",
               ),
               // banner slider
               const CarouselSlid(),
@@ -129,7 +123,6 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 width: width,
                 height: 100,
-                // color: Colors.red,
                 child: GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -180,9 +173,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         child: Obx(
                           () => Container(
-                            width: width * 0.26,
                             height: height * 0.05,
                             alignment: Alignment.center,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: width * 0.05, vertical: 5),
+                            margin: const EdgeInsets.only(right: 10),
                             decoration: BoxDecoration(
                               color:
                                   _productGetController.selectedIndex.value ==
