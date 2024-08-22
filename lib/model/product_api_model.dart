@@ -1,7 +1,7 @@
 class ProductDetails {
   int? id;
   String? title;
-  dynamic? price;
+  dynamic price;
   String? description;
   String? category;
   String? image;
@@ -28,22 +28,22 @@ class ProductDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['price'] = this.price;
-    data['description'] = this.description;
-    data['category'] = this.category;
-    data['image'] = this.image;
-    if (this.rating != null) {
-      data['rating'] = this.rating!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['price'] = price;
+    data['description'] = description;
+    data['category'] = category;
+    data['image'] = image;
+    if (rating != null) {
+      data['rating'] = rating!.toJson();
     }
     return data;
   }
 }
 
 class Rating {
-  dynamic? rate;
+  dynamic rate;
   int? count;
 
   Rating({this.rate, this.count});
@@ -54,9 +54,9 @@ class Rating {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['rate'] = this.rate;
-    data['count'] = this.count;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['rate'] = rate;
+    data['count'] = count;
     return data;
   }
 }
