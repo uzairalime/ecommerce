@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "951657836486",
-    "project_id": "ecommerce-c9da2",
-    "storage_bucket": "ecommerce-c9da2.appspot.com"
+    "project_number": "105105909683",
+    "project_id": "ecommerce-85d17",
+    "storage_bucket": "ecommerce-85d17.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:951657836486:android:053658fe96d5d226188cc7",
+        "mobilesdk_app_id": "1:105105909683:android:6b26d6c3a966f62c398dc6",
         "android_client_info": {
-          "package_name": "com.android.application"
+          "package_name": "com.example.ecommerce"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "105105909683-1heikftln2lvej7425avv5jfe6r8c4cr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecommerce",
+            "certificate_hash": "deb6725ba6f34fa806101105b28f9c6db6da149e"
+          }
+        },
+        {
+          "client_id": "105105909683-u2js6ctkjr5s9g0o11u30tus80i80jc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDiM7vmzulhdFA_QAAZL5YOJBJD23rf2Eg"
+          "current_key": "AIzaSyDOSE7HOLYZ4mLbFqrJJF4Du0aSeN_mtXo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105105909683-u2js6ctkjr5s9g0o11u30tus80i80jc2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
