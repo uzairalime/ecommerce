@@ -35,7 +35,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
             icon: Icons.shopping_cart_outlined,
             onTap: () =>
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const ProductDetailsScreen();
+              return  ProductDetailsScreen();
             })),
             num: 2,
           ),

@@ -14,6 +14,7 @@ TextStyle greyTextStyle(double? size, {FontWeight? weight}) {
 // blackfieldtext
 TextStyle blackTextStyle(double? size, {FontWeight? weight}) {
   return GoogleFonts.inter(
+    
     fontSize: size ?? 14,
     color: AppColor().secondary,
     fontWeight: weight ?? FontWeight.w400,

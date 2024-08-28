@@ -1,4 +1,6 @@
 import 'package:ecommerce/view/authorization/login_screen.dart';
+import 'package:ecommerce/view/dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,6 +22,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
@@ -28,8 +32,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const DashBoard(),
-      home: const LoginScreen(),
-      
+      home: user == null ? const LoginScreen() : const DashBoard(),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:coolicons/coolicons.dart';
 import 'package:ecommerce/controller/product_get_controller.dart';
+import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/model/category_model.dart';
 import 'package:ecommerce/utilities/colors.dart';
 import 'package:ecommerce/utilities/notification_icon.dart';
@@ -11,8 +12,11 @@ import 'package:ecommerce/utilities/widgets/carousel_slid.dart';
 import 'package:ecommerce/utilities/widgets/categry_card.dart';
 import 'package:ecommerce/utilities/widgets/filter_btn.dart';
 import 'package:ecommerce/utilities/widgets/sl_button.dart';
+import 'package:ecommerce/view/authorization/login_screen.dart';
 import 'package:ecommerce/view/product_details_screen.dart';
 import 'package:ecommerce/view/search_product_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +30,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final ProductGetController _productGetController =
       Get.put(ProductGetController());
+final WishlistController wishlistController = Get.put(WishlistController());
+  // final WishlistController _wishlistController = Get.find();
 
   @override
   void initState() {
@@ -97,6 +103,16 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () => log("Notification"),
             num: 2,
           ),
+          // logout icon
+          IconButton(onPressed: () {
+            FirebaseAuth.instance.signOut().then((value) {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                return const LoginScreen();
+              }));
+            },);
+          }, icon: Icon(Icons.logout))
+          
+          
         ],
       ),
       body: Padding(
@@ -195,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               // ---------------------------------------------------------------------
@@ -223,11 +239,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           _productGetController.filteredProductList[index];
                       return InkWell(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return ProductDetailsScreen();
-                            },
-                          ));
+                          Get.to( ProductDetailsScreen(), arguments: model);
+                          
+                          // Navigator.push(context, MaterialPageRoute(
+                          //   builder: (context) {
+                          //     return ProductDetailsScreen();
+                              
+                          //   },
+                          // ));
                         },
                         child: Container(
                           width: width * 0.43,
@@ -305,25 +324,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
 
-              // ---------------------------------------------------------------------
-              // GridView.builder(
-              //   shrinkWrap: true,
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //       childAspectRatio: 2 / 3,
-              //       crossAxisCount: 2,
-              //       crossAxisSpacing: 10,
-              //       mainAxisSpacing: 10),
-              //   itemCount: productCardList.length,
-              //   itemBuilder: (context, index) {
-              //     return ProductCard(
-              //       img: productCardList[index].img,
-              //       title: productCardList[index].title,
-              //       price: productCardList[index].price,
-              //       onTap: productCardList[index].onTap,
-              //     );
-              //   },
-              // ),
+              
               // -----------------------------------------------------------------------------
             ],
           ),

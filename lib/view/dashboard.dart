@@ -18,7 +18,7 @@ class _DashBoardState extends State<DashBoard> {
   bool selected = true;
   final pages = [
     const HomeScreen(),
-    const WishlistScreen(),
+     WishlistScreen(),
     const HistoryScreen(),
     const AccountScreen()
   ];

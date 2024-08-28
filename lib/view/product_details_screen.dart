@@ -1,4 +1,7 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce/controller/wishlist_controller.dart';
+import 'package:ecommerce/model/product_model.dart';
 import 'package:ecommerce/utilities/colors.dart';
 import 'package:ecommerce/utilities/notification_icon.dart';
 import 'package:ecommerce/utilities/text/greytextstyle.dart';
@@ -6,22 +9,31 @@ import 'package:ecommerce/utilities/widgets/follow_btn.dart';
 import 'package:ecommerce/utilities/widgets/sl_button.dart';
 import 'package:ecommerce/view/cart_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  ProductDetailsScreen({super.key});
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  bool heartClicked = false;
+  final WishlistController _wishlistController = Get.find();
+  // bool heartClicked = false;
   bool followClicked = false;
+
+  final ProductModel product = Get.arguments;
+
+  // bool get isInWishlist => null;
+
+  // final Model product = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
+    // bool isInWishList = _wishlistController.isInWishList(product);
     return Scaffold(
         appBar: AppBar(
           // back screen button
@@ -53,7 +65,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // product image
-              Image.asset('assets/images/product_img.png'),
+              Container(
+                  color: Colors.white,
+                  child: Image.network(
+                    product.image,
+                    width: width,
+                    height: height * 0.4,
+                  )),
               // product name and price and heart icon
               Padding(
                 padding:
@@ -70,14 +88,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // product name
-                              Text("Air pods max by Apple",
-                                  style: blackTextStyle(18,
-                                      weight: FontWeight.w500)),
+                              SizedBox(
+                                width: width * 0.8,
+                                child: Text(product.title,
+                                    style: blackTextStyle(18,
+                                            weight: FontWeight.w500)
+                                        .copyWith(
+                                            overflow: TextOverflow.visible)),
+                              ),
                               // price and people buy this
                               Row(
                                 children: [
                                   Text(
-                                    "\$ 1999,99",
+                                    "\$" + product.price.toString(),
                                     style: blackTextStyle(20,
                                         weight: FontWeight.w500),
                                   ),
@@ -92,45 +115,61 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ],
                           ),
                           // heart icon
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                heartClicked = !heartClicked;
-                              });
-                            },
-                            child: Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                child: Icon(
-                                  heartClicked
-                                      ? Icons.heart_broken_outlined
-                                      : Icons.heart_broken,
-                                  size: 30,
-                                  color: heartClicked
-                                      ? AppColor().secondaryGrey
-                                      : AppColor().primary,
-                                )
-                                // IconButton(
-                                //     onPressed: () {
-                                //       setState(() {
-                                //         heartClicked = !heartClicked;
-                                //       });
-                                //     },
-                                //     icon: Icon(
-                                //       Icons.heart_broken_outlined,
-                                //       size: 30,
-                                //       color: heartClicked
-                                //           ? AppColor().secondaryGrey
-                                //           : AppColor().primary,
-                                //     )),
-                                ),
+                          Obx(() => InkWell(
+                              onTap: () {
+                                if (_wishlistController.isInWishList(product)) {
+                                  _wishlistController.removeFromWishList(product);
+                                  // log(_wishlistController.isInWishList(product).toString());
+                                } else {
+                                  log("===== pr $product");
+
+                                  _wishlistController.addToWishList(product);
+                                  // log(_wishlistController.isInWishList(product).toString());
+                                  
+                                }
+                              },
+                              child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Icon(
+                                    _wishlistController.isInWishList(product)
+                                        ? Icons.heart_broken
+                                        : Icons.heart_broken_outlined,
+                                    size: 30,
+                                    color: _wishlistController.isInWishList(product)
+                                        ? AppColor().primary
+                                        : AppColor().secondaryGrey,
+                                  )),
+                            ),
                           )
-                          //
+                          // 
                         ],
                       ),
+                      const SizedBox(height: 10),
+                      Container(
+                        // width: width*0.3,
+
+                        // height: 50,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          product.category,
+                          style: greyTextStyle(16, weight: FontWeight.w500)
+                              .copyWith(
+                            color: AppColor().primary,
+                          ),
+                        ),
+                      ),
+
                       const SizedBox(height: 10),
                       // color title
                       Text(
@@ -143,7 +182,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         children: [
                           // color 1
                           Container(
-                            width: 90,
+                            width: width * 0.2,
                             height: 50,
                             padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
@@ -220,7 +259,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         style: blackTextStyle(18, weight: FontWeight.w500),
                       ),
                       Text(
-                        "data",
+                        product.description,
                         style: blackTextStyle(14),
                       )
                     ]),
