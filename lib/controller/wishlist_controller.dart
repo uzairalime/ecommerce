@@ -1,3 +1,6 @@
+//================================ Localy store wish list ==============================
+
+
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:ecommerce/model/product_model.dart';
 // import 'package:get/get.dart';
@@ -39,6 +42,7 @@ class WishlistController extends GetxController {
     super.onInit();
     fetchWishlist();
   }
+  // Fetch the wishlist from Firestore
   void fetchWishlist() async {
     try {
       var snapshot = await _firestore.collection('wishlist').get();
@@ -52,6 +56,7 @@ class WishlistController extends GetxController {
     }
   }
   // Add a product to the wishlist
+  
   void addToWishList(ProductModel product) async {
     try {
       await _firestore.collection('wishlist').doc().set(product.toJson());

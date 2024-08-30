@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:ecommerce/controller/wishlist_controller.dart';
 import 'package:ecommerce/model/product_model.dart';
 import 'package:ecommerce/utilities/colors.dart';
@@ -20,6 +20,7 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   final WishlistController _wishlistController = Get.find();
+  final CartlistController _cartlistController = Get.find();
   // bool heartClicked = false;
   bool followClicked = false;
 
@@ -54,7 +55,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             // cart icon
             NotificationIcon(
                 icon: Icons.shopping_cart_outlined,
-                onTap: () => log("Cart"),
+                onTap: () => Get.to(() => const CartScreen()),
                 num: 2),
             const SizedBox(width: 10),
           ],
@@ -121,8 +122,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   _wishlistController.removeFromWishList(product);
                                   // log(_wishlistController.isInWishList(product).toString());
                                 } else {
-                                  log("===== pr $product");
-
                                   _wishlistController.addToWishList(product);
                                   // log(_wishlistController.isInWishList(product).toString());
                                   
@@ -276,11 +275,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               // Add to Cart button
-              SlButton(
-                text: "Add to Cart",
-                onTap: () => log("Add to Cart"),
+              Obx(() => SlButton(
+                text: _cartlistController.isInCart(product) ? "Remove from Cart": "Add to Cart",
+                onTap: (){
+                  if (_cartlistController.isInCart(product)) {
+                    log("add to cart btn ");
+                    _cartlistController.removeFromCart(product);
+                    
+                  } else {
+                    _cartlistController.addtoCart(product);
+                    log("remove from cart btn");
+                  }
+                  log("${_cartlistController.isInCart(product)}");
+                } ,
                 widthbtn: width * 0.4,
-              ),
+              ),),
               // Buy Now button
               SlButton(
                 text: "Buy Now",

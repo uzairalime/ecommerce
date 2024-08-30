@@ -42,13 +42,13 @@ class _DashBoardState extends State<DashBoard> {
             BottomNavigationBarItem(
               icon: selectedIndex == 0
                   ? const Icon(Icons.home_filled)
-                  : const Icon(Icons.abc),
+                  : const Icon(Icons.home_filled),
               label: "Home",
             ),
             BottomNavigationBarItem(
                 icon: selectedIndex == 1
-                    ? const Icon(Coolicons.search)
-                    : const Icon(Coolicons.search),
+                    ? const Icon(Coolicons.heart_fill)
+                    : const Icon(Coolicons.heart_outline),
                 label: "Whislist"),
             BottomNavigationBarItem(
                 icon: selectedIndex == 2

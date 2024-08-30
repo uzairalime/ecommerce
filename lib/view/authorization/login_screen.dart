@@ -3,10 +3,12 @@ import 'package:ecommerce/utilities/input_text_field.dart';
 import 'package:ecommerce/utilities/text/greytextstyle.dart';
 import 'package:ecommerce/utilities/widgets/sl_button.dart';
 import 'package:ecommerce/view/authorization/signup_screen.dart';
+import 'package:ecommerce/view/dashboard.dart';
 import 'package:ecommerce/view/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -68,9 +70,10 @@ class LoginScreen extends StatelessWidget {
               onTap: () {
                 signInGoogle().then((value) {
                   if (value != null) {
-                    Navigator.push(context, MaterialPageRoute(
+                    // Get.to( const DashBoard());
+                    Navigator.pushReplacement(context, MaterialPageRoute(
                       builder: (context) {
-                        return const HomeScreen();
+                        return const DashBoard();
                       },
                     ));
                     log("Google Sign-In Successful: ${value.user!.displayName}");

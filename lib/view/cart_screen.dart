@@ -1,12 +1,14 @@
 import 'dart:developer';
-
+import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:ecommerce/utilities/colors.dart';
 import 'package:ecommerce/utilities/notification_icon.dart';
 import 'package:ecommerce/utilities/text/greytextstyle.dart';
+import 'package:ecommerce/utilities/widgets/cart_item_card.dart';
 import 'package:ecommerce/utilities/widgets/circle_btn.dart';
 import 'package:ecommerce/utilities/widgets/sl_button.dart';
 import 'package:ecommerce/view/checkout_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -16,6 +18,11 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  // final CartlistController cartlistController = Get.find();
+  final CartlistController cartlistController = Get.put(CartlistController());
+
+
+
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -24,6 +31,7 @@ class _CartScreenState extends State<CartScreen> {
     String selectedLocation = 'Salatiga City, Central Java';
     int qty = 1;
     int items = 0;
+    // RxInt subtotal = ,
 
     return SafeArea(
       child: Scaffold(
@@ -90,89 +98,47 @@ class _CartScreenState extends State<CartScreen> {
                 ],
               ),
               Divider(color: AppColor().greyColor, thickness: 1),
-              const SizedBox(height: 20),
-              // Cart Card
-              Row(
-                children: [
-                  // check box
-                  Transform.scale(
-                    scale: 1.3,
-                    child: Checkbox(
-                      value: isChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked = value!;
-                        });
+              Obx(() => Expanded(
+                child: cartlistController.checkCarthaveproduct() ? Center(child: Text("No Product in the Cart", style: blackTextStyle(16),)) : ListView.builder(
+                  itemCount: cartlistController.cartList.length,
+                  itemBuilder: (context, index) {
+                    final product = cartlistController.cartList[index];
+
+                //     final price = product.price.toString();
+                //     final qty = cartlistController.items.value;
+                //     final subtotal =
+                    
+                //      product.price * qty;
+                // //  cartlistController.setSubtotal(subtotal);
+                  cartlistController.setTotalItmePrice(cartlistController.items.value, product.price);
+
+
+
+                    return Obx(() => CartItemCard(
+                      image: product.image.toString(),
+                      title: product.title.toString(),
+                      price:cartlistController. subtotal.value,
+                      qty: cartlistController.items.value, 
+                      // delete product
+                      onTapDelete: (){
+                        cartlistController.removeFromCart(product);
                       },
-                      activeColor: AppColor().primary,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  // Cart Product image
-                  Image.asset(
-                    'assets/images/product_img.png',
-                    width: width * 0.2,
-                    height: height * 0.1,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(width: 15),
-                  // Cart Product details
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // title
-                      Text(
-                        "Air pods max by Apple",
-                        style: blackTextStyle(16, weight: FontWeight.w500),
-                      ),
-                      // varient
-                      Text(
-                        "Varient: Black",
-                        style: greyTextStyle(14),
-                      ),
-                      // Spacer(),
-                      const SizedBox(height: 15),
-                      // price and qty add , delete and remove button
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // price and qty
-                          Text("Price: \$ 500",
-                              style:
-                                  blackTextStyle(14, weight: FontWeight.w500)),
-                          const SizedBox(width: 10),
-                          // qty
-                          Text("Qty: ${qty}", style: greyTextStyle(14)),
-                          const SizedBox(width: 40),
-                          // add and remove button
-                          // subtract button
-                          CircleBtn(
-                            icon: Icons.remove,
-                            onTap: () => log("subtract"),
-                          ),
-                          const SizedBox(width: 5),
-                          Text(items.toString(),
-                              style:
-                                  blackTextStyle(18, weight: FontWeight.w600)),
-                          const SizedBox(width: 5),
-                          // add button
-                          CircleBtn(
-                            icon: Icons.add,
-                            onTap: () => log("add"),
-                          ),
-                          const SizedBox(width: 10),
-                          // delete button
-                          CircleBtn(
-                            icon: Icons.delete_outline_outlined,
-                            onTap: () => log("Delete"),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                      // add qty
+                      onTapAdd: (){
+                        // log(product.price.value* qty.toDouble());
+                        cartlistController.incrementQty();
+                        log("price subtotal ${cartlistController.subtotal.value.toString()}");
+                        log(" price product ${product.price.toString()}");
+                      },
+                      // substract qty
+                      onTapSub: (){
+                        cartlistController.decrementQty();
+                      },
+                    ),);
+                },),
+              ),),
+              // Cart Card
+              const SizedBox(height: 20)
               //
             ],
           ),
@@ -188,7 +154,7 @@ class _CartScreenState extends State<CartScreen> {
                 indent: 10,
                 endIndent: 10,
               ),
-
+              // Total price
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -197,23 +163,22 @@ class _CartScreenState extends State<CartScreen> {
                     Text("Totals",
                         style: blackTextStyle(16, weight: FontWeight.w500)),
                     Text("\$ 500", style: blackTextStyle(16)),
+                    // Obx(() => Text("\$ 500", style: blackTextStyle(16)),)
                   ],
                 ),
               ),
               const SizedBox(height: 10),
               // Checkout button
               SlButton(
-                  text: "Continue for payments",
+                  text: "Continue for payments" ,
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CheckoutScreen();
-                    }));
+
+                    Get.to(CheckoutScreen());
                   },
                   widthbtn: width * 0.9,
                   bgBtnColor:
-                      isChecked ? AppColor().primary : AppColor().greyColor,
-                  textColor: isChecked ? Colors.white : Colors.black),
+                      cartlistController.checkCarthaveproduct() ? AppColor().greyColor : AppColor().primary,
+                  textColor: cartlistController.checkCarthaveproduct() ? Colors.black : Colors.white),
             ],
           ),
         ),

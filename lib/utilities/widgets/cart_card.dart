@@ -42,7 +42,7 @@ class _CartCardState extends State<CartCard> {
 
     return SizedBox(
       width: width,
-      height: height * 0.11,
+      height: 100,
       child: Row(
         children: [
           // check box
